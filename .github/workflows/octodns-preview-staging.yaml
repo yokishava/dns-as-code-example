@@ -7,7 +7,7 @@ on:
 
 jobs:
   preview:
-    name: Publish DNS config from main
+    name: Preview DNS config
     runs-on: ubuntu-20.04
     env:
       GCLOUD_KEY: ${{ secrets.OCTODNS_GCP_KEY }}
@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.10'
-      # - run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt
       - run: echo "$GCLOUD_KEY" > google_cloud_credentials_staging.json
       - uses: solvaholic/octodns-sync@main
         with:
