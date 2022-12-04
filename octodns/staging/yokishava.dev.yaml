@@ -17,8 +17,3 @@ welcome:
   type: A
   values:
     - 199.36.158.100
-
-world:
-  type: A
-  values:
-    - 199.36.158.100
