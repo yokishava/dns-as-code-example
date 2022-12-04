@@ -1,0 +1,22 @@
+manager:
+  plan_outputs:
+    html:
+      class: octodns.provider.plan.PlanHtml
+
+providers:
+  config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: ./octodns/staging
+    enforce_order: false
+    default_ttl: 3600
+  googlecloud:
+    class: octodns_googlecloud.GoogleCloudProvider
+    project: yokishava-staging
+    credentials_file: ./google_cloud_credentials_staging.json
+
+zones:
+  yokishava.dev.:
+    sources:
+      - config
+    targets:
+      - googlecloud

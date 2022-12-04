@@ -1,0 +1,47 @@
+name: Check
+
+on:
+  pull_request:
+    paths:
+      - "dnscontrol/staging/**"
+
+
+defaults:
+  run:
+    working-directory: dnscontrol/staging    
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    env:
+      GCLOUD_KEY: ${{ secrets.DNSCONTROL_GCP_KEY }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: DNSControl check
+        uses: koenrh/dnscontrol-action@v3
+        with:
+          args: check
+          config_file: 'dnsconfig.js'
+
+      - name: Put creds.json
+        run: echo "$GCLOUD_KEY" > creds.json
+
+      - name: DNSControl preview
+        uses: koenrh/dnscontrol-action@v3
+        id: dnscontrol_preview
+        with:
+          args: preview
+          config_file: 'dnscontrol.js'
+          creds_file: 'creds.json'
+
+      - name: Preview pull request comment
+        uses: unsplash/comment-on-pr@v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: |
+            ```
+            ${{ steps.dnscontrol_preview.outputs.preview_comment }}
+            ```
+          check_for_duplicate_msg: true

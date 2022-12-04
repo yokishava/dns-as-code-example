@@ -1,0 +1,17 @@
+providers:
+  config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: ./octodns/production
+    enforce_order: false
+    default_ttl: 3600
+  googlecloud:
+    class: octodns_googlecloud.GoogleCloudProvider
+    project: yokishava-production
+    credentials_file: ./google_cloud_credentials_production.json
+
+zones:
+  yokishava.app.:
+    sources:
+      - config
+    targets:
+      - googlecloud

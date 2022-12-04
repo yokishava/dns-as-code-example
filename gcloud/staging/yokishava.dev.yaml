@@ -1,0 +1,25 @@
+#.YAML ファイルは、Google Cloud によって管理されるドメインに
+# DNS レコードをエクスポートするために使用します。この形式は
+# Google Cloud DNS 専用です。
+
+---
+kind: dns#resourceRecordSet
+name: 'hello.yokishava.dev.'
+rrdatas:
+- '199.36.158.100'
+ttl: 3600
+type: A
+---
+kind: dns#resourceRecordSet
+name: 'welcome.yokishava.dev.'
+rrdatas:
+- '199.36.158.100'
+ttl: 3600
+type: A
+---
+# kind: dns#resourceRecordSet
+# name: world.yokishava.dev.
+# rrdatas:
+# - 199.36.158.100
+# ttl: 3600
+# type: A

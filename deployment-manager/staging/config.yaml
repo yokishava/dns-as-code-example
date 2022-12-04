@@ -1,0 +1,32 @@
+# Example of the DNS records template usage.
+#
+# This example creates DNS RecordSets to manage a set of DNS records.
+# The records are created for a given managed zone, defined by 
+# the `zoneName` property, and a DNS name defined by the `dnsName` property.
+
+imports:
+  - path: ../dns_records.py
+    name: dns_records.py
+
+resources:
+- name: yokishava-dev-dns-records
+  type: dns_records.py
+  properties:
+    zoneName: yokishava-dev
+    dnsName: yokishava.dev.
+    resourceRecordSets:
+      - name: hello.yokishava.dev.
+        type: A
+        ttl: 3600
+        rrdatas:
+          - 199.36.158.100
+      - name: welcome.yokishava.dev.
+        type: A
+        ttl: 3600
+        rrdatas:
+          - 199.36.158.100
+      # - name: world.yokishava.dev.
+      #   type: A
+      #   ttl: 3600
+      #   rrdatas:
+      #     - 199.36.158.100
