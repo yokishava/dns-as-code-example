@@ -7,10 +7,6 @@ on:
     paths:
       - "dnscontrol/staging/**"
 
-defaults:
-  run:
-    working-directory: dnscontrol/staging
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Put creds.json
-        run: echo "$GCLOUD_KEY" > creds.json
+        run: echo "$GCLOUD_KEY" > dnscontrol/staging/creds.json
 
       - name: DNSControl push
         uses: koenrh/dnscontrol-action@v3
@@ -28,8 +24,5 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
           args: push
-
-          # Optionally, if your DNSConfig files are in a non-default location,
-          # you could specify the paths to the config and credentials file.
-          config_file: 'dnsconfig.js'
-          creds_file: 'creds.json'
+          config_file: 'dnscontrol/staging/dnsconfig.js'
+          creds_file: 'dnscontrol/staging/creds.json'
