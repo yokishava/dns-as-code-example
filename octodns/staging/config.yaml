@@ -1,7 +1,7 @@
 manager:
   plan_outputs:
     html:
-      class: octodns.provider.plan.PlanHtml
+      class: octodns.googlecloud.plan.PlanHtml
 
 providers:
   config:
