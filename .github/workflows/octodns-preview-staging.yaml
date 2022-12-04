@@ -7,7 +7,7 @@ on:
 
 jobs:
   preview:
-    name: Publish DNS config from main
+    name: Preview DNS config
     runs-on: ubuntu-20.04
     env:
       GCLOUD_KEY: ${{ secrets.OCTODNS_GCP_KEY }}
