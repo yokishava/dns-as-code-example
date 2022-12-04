@@ -22,4 +22,4 @@ jobs:
         with:
           config_path: octodns/staging/config.yaml
           add_pr_comment: 'Yes'
-          pr_comment_token: '${{ github.token }}'
+          pr_comment_token: ${{ secrets.GITHUB_TOKEN }}
