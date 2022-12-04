@@ -1,4 +1,4 @@
-name: Check
+name: Preview by DNScontrol
 
 on:
   pull_request:
