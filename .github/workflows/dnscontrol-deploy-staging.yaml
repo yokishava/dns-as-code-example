@@ -1,4 +1,4 @@
-name: Push
+name: Deploy by DNScontrol
 
 on:
   push:
@@ -12,7 +12,7 @@ defaults:
     working-directory: dnscontrol/staging
 
 jobs:
-  push:
+  deploy:
     runs-on: ubuntu-latest
     env:
       GCLOUD_KEY: ${{ secrets.DNSCONTROL_GCP_KEY }}

@@ -1,4 +1,4 @@
-name: octodns-sync
+name: Preview by octoDNS
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name: octodns-sync
+name: Deploy by octoDNS
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - 'octodns/staging/**'
 
 jobs:
-  publish:
+  deploy:
     name: Publish DNS config from main
     runs-on: ubuntu-20.04
     env:
