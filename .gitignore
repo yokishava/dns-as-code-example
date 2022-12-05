@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 google_cloud_credentials_staging.json
+gcloud-credential.json
 
 **/creds.json
