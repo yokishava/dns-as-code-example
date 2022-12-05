@@ -21,7 +21,8 @@ jobs:
   apply:
     name: "Apply by Terraform"
     runs-on: ubuntu-latest
-
+    env:
+      GCLOUD_KEY: ${{ secrets.TF_GCP_SA_KEY }}
     steps:
       - uses: actions/checkout@v3
 
@@ -31,6 +32,7 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WI_PROVIDER }}
           service_account: ${{ secrets.GCP_SA }}
+      - run: echo "$GCLOUD_KEY" > gcloud-credential.json
 
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform Init
