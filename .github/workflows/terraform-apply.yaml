@@ -7,6 +7,10 @@ on:
     paths:
       - 'terraform/**'
 
+defaults:
+  run:
+    working-directory: terraform
+
 jobs:
   apply:
     name: "Apply by Terraform"
@@ -16,8 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
-      - run: echo "$GCLOUD_KEY" > terraform/gcloud-credential.json
+      - run: echo "$GCLOUD_KEY" > gcloud-credential.json
       - name: "Terraform Apply"
         id: apply
-        working-directory: terraform
         run: terraform apply -auto-approve -no-color
