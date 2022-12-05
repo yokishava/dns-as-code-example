@@ -1,0 +1,38 @@
+name: Apply by Terraform
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - 'terraform/**'
+
+defaults:
+  run:
+    working-directory: terraform
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  apply:
+    name: "Apply by Terraform"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.WI_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA }}
+
+      - uses: hashicorp/setup-terraform@v2
+      - name: "Terraform Apply"
+        id: apply
+        run: terraform apply -auto-approve -no-color
