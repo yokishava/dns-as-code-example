@@ -13,10 +13,17 @@ jobs:
   plan:
     name: "Plan by Terraform"
     runs-on: ubuntu-latest
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.TERRAFORM_GCP_KEY }}
+
     steps:
       - uses: actions/checkout@v3
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.WI_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA }}
+
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform fmt
         id: fmt
