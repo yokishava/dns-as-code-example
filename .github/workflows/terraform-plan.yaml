@@ -9,6 +9,12 @@ defaults:
   run:
     working-directory: terraform
 
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+
 jobs:
   plan:
     name: "Plan by Terraform"
@@ -21,8 +27,8 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: 'projects/279091920414/locations/global/workloadIdentityPools/github-actions-pool/providers/gha-provider'
-          service_account: 'terraform-sa@yokishava-staging.iam.gserviceaccount.com'
+          workload_identity_provider: ${{ secrets.WI_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA }}
 
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform fmt
