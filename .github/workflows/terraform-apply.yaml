@@ -1,7 +1,9 @@
 name: Apply by Terraform
 
 on:
-  pull_request:
+  push:
+    branches:
+      - "main"
     paths:
       - 'terraform/**'
 
