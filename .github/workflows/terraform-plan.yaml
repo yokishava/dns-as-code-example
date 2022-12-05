@@ -14,11 +14,10 @@ jobs:
     name: "Plan by Terraform"
     runs-on: ubuntu-latest
     env:
-      GCLOUD_KEY: ${{ secrets.TERRAFORM_GCP_KEY }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.TERRAFORM_GCP_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
-      - run: echo "$GCLOUD_KEY" > gcloud-credential.json
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
