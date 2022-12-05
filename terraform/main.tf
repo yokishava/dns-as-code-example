@@ -43,16 +43,6 @@ resource "google_dns_record_set" "welcome" {
   rrdatas = ["199.36.158.100"]
 }
 
-resource "google_dns_record_set" "world" {
-  name = "world.yokishava.dev."
-  type = "A"
-  ttl  = 3600
-
-  managed_zone = var.managed_zone
-
-  rrdatas = ["199.36.158.100"]
-}
-
 resource "google_dns_record_set" "nameserver" {
   name = "yokishava.dev."
   type = "NS"
